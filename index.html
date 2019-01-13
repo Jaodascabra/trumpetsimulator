@@ -1,0 +1,74 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Trumpet b0y Simulator 2000</title>	
+		<style>
+			#wrapper{
+				position:relative;
+				width:900px;
+				height:500px;
+			}
+			#lel,#desenho{
+				position:absolute; top:0px; left:0px;
+				width:900px;
+				height:500px;
+			}
+		</style>
+		
+	</head>
+	<body>
+		
+		<audio id="musica" src="trumpet.wav"></audio>
+		
+		<div id="wrapper">
+			<img src='trumpet2.jpg' id="lel" width="900" height="500">
+			<canvas id="desenho" width="900" height="500"></canvas>
+		</div>
+		clique na imagem e comece a mexer o mouse que nem louco
+		
+		<script>
+			function getMousePos(canvas, evt) {
+				var rect = canvas.getBoundingClientRect()
+				return {
+				x: evt.clientX - rect.left,
+				y: evt.clientY - rect.top
+				}
+			}
+			
+			function imagemm(x,y) {
+				
+				context.clearRect(0, 0, 1900, 1000)
+				imagem = new Image();
+				imagem.src = 'boy.png';
+				context.drawImage(imagem, x-70, y-100)
+			
+				if(musica.paused==true)
+				musica.play()		
+			}
+			
+			var canvas = document.getElementById('desenho')
+			var context = canvas.getContext('2d')				
+			var preto = '#000'
+			context.lineWidth = 5
+			context.fillStyle = preto
+			context.strokeStyle = preto
+			musica = document.getElementById("musica")
+			
+			canvas.addEventListener('mousemove', function(evt) {
+				var mousePos = getMousePos(canvas, evt);
+				var x = mousePos.x 
+				var y = mousePos.y;
+				
+				imagemm(x,y)
+				
+			}, false);	
+			
+			var myVar = setInterval(myTimer, 100);
+
+				function myTimer() {
+				if(musica.paused==false)
+				musica.pause()
+				}	
+		</script>
+	</body>
+</html>
